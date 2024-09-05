@@ -1,0 +1,25 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:16.2-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+  social_mood:
+    depends_on:
+      - postgres
+    container_name: social_mood
+    build: .
+    ports:
+      - "7777:7777"
+    environment:
+      # DataBase
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=postgres
+      # JWT
+      - JWT_SECRET=0xZero
