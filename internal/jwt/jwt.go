@@ -103,7 +103,7 @@ func parseDuration(s string) (time.Duration, error) {
 		return 0, fmt.Errorf("error parse int: %v", err)
 	}
 
-	unit, ok := units[string(s[len(s)-1])] // Исправление на получение последнего символа как единицы измерения
+	unit, ok := units[string(s[len(s)-1])]
 	if !ok {
 		return 0, fmt.Errorf("unknown time unit: %s", string(s[len(s)-1]))
 	}

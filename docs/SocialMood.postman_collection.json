@@ -21,7 +21,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:7777/api/auth/register",
+					"raw": "localhost:7777/api/user/register",
 					"host": [
 						"localhost"
 					],

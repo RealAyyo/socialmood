@@ -46,7 +46,7 @@ func NewServer(
 
 	// user
 	userPath := apiV1.NewGroupPath("/user")
-	authPath.POST("/register", userController.Register)
+	userPath.POST("/register", userController.Register)
 	userPath.GET("/get/{id}", userController.GetById)
 
 	if err := server.ListenAndServe(); err != nil {

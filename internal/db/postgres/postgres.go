@@ -47,6 +47,6 @@ func (p *PostgresqlRepository) Connect(ctx context.Context) error {
 	return nil
 }
 
-func (p *PostgresqlRepository) Close(ctx context.Context) {
+func (p *PostgresqlRepository) Close() {
 	p.DB.Close()
 }
