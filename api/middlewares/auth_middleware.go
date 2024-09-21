@@ -28,7 +28,7 @@ func AuthMiddleware(jwtService *jwt.JWT) func(ctx *atreugo.RequestCtx) error {
 		}
 
 		switch string(ctx.Path()) {
-		case "/api/auth/register":
+		case "/api/user/register":
 			return ctx.Next()
 		case "/api/auth/login":
 			return ctx.Next()

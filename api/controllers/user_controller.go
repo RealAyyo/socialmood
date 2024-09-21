@@ -17,6 +17,7 @@ type UserUseCases interface {
 	WebRegisterFlow(ctx context.Context, registerDto dto.RegisterDto) error
 	Login(ctx context.Context, loginDto dto.LoginDto) (string, error)
 	GetById(ctx context.Context, userID uuid.UUID, inputID string) (entities.UserEntity, error)
+	Search(ctx context.Context, searchDto dto.SearchDto) ([]entities.UserEntity, error)
 }
 
 type UserController struct {
@@ -77,4 +78,27 @@ func (a *UserController) GetById(ctx *atreugo.RequestCtx) error {
 	return ctx.JSONResponse(&Response{
 		Data: user,
 	}, fasthttp.StatusOK)
+}
+
+func (a *UserController) Search(ctx *atreugo.RequestCtx) error {
+	var searchDto dto.SearchDto
+	err := validators.ValidatePostQuery(ctx, &searchDto)
+	if err != nil {
+		return ctx.JSONResponse(&Response{
+			Message: err.Error(),
+			Result:  0,
+		}, fasthttp.StatusBadRequest)
+	}
+	users, err := a.userUseCases.Search(ctx, searchDto)
+	if err != nil {
+		return ctx.JSONResponse(&Response{
+			Message: err.Error(),
+			Result:  0,
+		}, fasthttp.StatusInternalServerError)
+	}
+
+	return ctx.JSONResponse(&Response{
+		Data: users,
+	}, fasthttp.StatusOK)
+	return nil
 }

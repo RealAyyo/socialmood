@@ -16,7 +16,6 @@ func (u *UserUseCases) Login(ctx context.Context, loginDto dto.LoginDto) (string
 		return "", err
 	}
 	if user.ID == uuid.Nil {
-		fmt.Println(2)
 		return "", exceptions.ErrInvalidEmailOrPassword
 	}
 

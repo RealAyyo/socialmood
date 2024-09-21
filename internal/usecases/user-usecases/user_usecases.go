@@ -2,6 +2,7 @@ package userUseCases
 
 import (
 	"context"
+	"socialmood/api/dto"
 	"socialmood/internal/config"
 	"socialmood/internal/entities"
 	"socialmood/internal/exceptions"
@@ -19,6 +20,7 @@ type UserRepository interface {
 	Create(ctx context.Context, userEntity *entities.UserEntity) (uuid.UUID, error)
 	GetById(ctx context.Context, userId uuid.UUID) (entities.UserEntity, error)
 	GetByEmail(ctx context.Context, email string) (entities.UserEntity, error)
+	Search(ctx context.Context, searchDto dto.SearchDto) ([]entities.UserEntity, error)
 }
 
 func NewUserUseCases(userRepository UserRepository, jwtConf *config.JWTConf) *UserUseCases {
